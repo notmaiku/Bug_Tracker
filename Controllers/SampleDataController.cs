@@ -16,19 +16,22 @@ namespace bug_tracker.Controllers
 
         private static string[] eGirls = new[]
         {
-            "Dracuina", "Jasmine", "Glooglue", "AngelicaDove", "Otakugirl", "JessicaBum", "KutieKitten", "Chuu", "Jinni", "MEAT"
+            "Jasmine", "Dracuina", "Glooglue", "AngelicaDove", "Otakugirl", "JessicaBum", "KutieKitten", "Chuu", "Jinni", "MEAT"
         };
 
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 6).Select(index => new WeatherForecast
+            var kek = Enumerable.Range(1, 6).Select(index => new WeatherForecast
+            
             {
                 DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
+            Console.Write(kek);
+            return kek;
         }
 
         [HttpGet("[action]")]
@@ -38,14 +41,14 @@ namespace bug_tracker.Controllers
             return Enumerable.Range(1, 6).Select(index => new EGirl
             {
                 hotnessRating = rng.Next(0, 10),
-                name = eGirls[rng.Next(Summaries.Length)]
+                name = eGirls[rng.Next(eGirls.Length)]
             });
         }
 
         public class EGirl
         {
-            public int hotnessRating { get; set; }
             public string name { get; set; }
+            public int hotnessRating { get; set; }
         }
 
         public class WeatherForecast
