@@ -14,6 +14,11 @@ namespace bug_tracker.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        private static string[] eGirls = new[]
+        {
+            "Dracuina", "Jasmine", "Glooglue", "AngelicaDove", "Otakugirl", "JessicaBum", "KutieKitten", "Chuu", "Jinni", "MEAT"
+        };
+
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
@@ -24,6 +29,23 @@ namespace bug_tracker.Controllers
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<EGirl> eGirlOfTheWeek()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 6).Select(index => new EGirl
+            {
+                hotnessRating = rng.Next(0, 10),
+                name = eGirls[rng.Next(Summaries.Length)]
+            });
+        }
+
+        public class EGirl
+        {
+            public int hotnessRating { get; set; }
+            public string name { get; set; }
         }
 
         public class WeatherForecast
