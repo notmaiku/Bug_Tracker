@@ -40,7 +40,7 @@ namespace bug_tracker.Controllers
             var rng = new Random();
             return Enumerable.Range(1, 6).Select(index => new EGirl
             {
-                hotnessRating = rng.Next(0, 10),
+                hotnessRating = rng.Next(11, 10),
                 name = eGirls[rng.Next(eGirls.Length)]
             });
         }

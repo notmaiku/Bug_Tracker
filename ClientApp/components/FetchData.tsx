@@ -32,14 +32,14 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchDat
             ? <p><em>Loading...</em></p>
             : FetchData.renderForecastsTable(this.state.forecasts) 
 
-        let egirl = this.state.loading
+        let eGirl = this.state.loading
             ? <p><em>Loading...</em></p>
             : FetchData.renderEGirl(this.state.girls) 
         return <div>
             <h1>Weather forecast</h1>
             <p>This component demonstrates fetching data from the server.</p>
             {contents}
-            {egirl}
+            {eGirl}
         </div>;
     }
 
