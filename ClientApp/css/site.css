@@ -14,20 +14,15 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    height: 60px;
-}
-
-nav ul li {
-    height: 100%;
-    padding-top: 10px;
+    align-items: baseline;
+    padding: 10px 0;
 }
 
 nav ul li a{
     margin-right: 40px;
     font-size: 24px;
     color: #F6F6F6;
-    height: 100%;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 nav ul li a:hover {
@@ -41,4 +36,31 @@ nav ul li a:hover {
 
 .fas {
     color: #F6F6F6;
+}
+
+#home-link {
+    font-size: 32px;
+}
+
+#bug-view{
+    display: flex;
+    flex-direction: column;
+}
+
+/* bug-list */
+aside#bug-list {
+    width: 300px;
+}
+aside#bug-list ul{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    background: #4E4E4E;
+    padding: 0;
+}
+
+aside#bug-list ul li{
+    border-bottom: solid #3C9C01 3px;
+    margin: 0 20px;
+    padding: 10px 0;
 }
