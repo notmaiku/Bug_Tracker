@@ -5,11 +5,11 @@ export interface LayoutProps {
     children?: React.ReactNode;
 }
 
-export class Layout extends React.Component<LayoutProps, {}> {
+export class Layout extends React.Component<LayoutProps, any> {
     public render() {
-        return <div>
-            <NavMenu />
+        return <span id="react-root">
+            <NavMenu/>
             {this.props.children}
-        </div>;
+        </span>;
     }
 }

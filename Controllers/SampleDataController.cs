@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
+
 
 namespace bug_tracker.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
+        private readonly IConfiguration configuration;
+        public SampleDataController(IConfiguration config)
+        {
+            this.configuration = config;
+        }
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -16,32 +24,46 @@ namespace bug_tracker.Controllers
 
         private static string[] eGirls = new[]
         {
-            "Jasmine", "Dracuina", "Glooglue", "AngelicaDove", "Otakugirl", "JessicaBum", "KutieKitten", "Chuu", "Jinni", "MEAT"
+            "Jasmine", "Dracuina", "Glooglue", "Angelica Dove", "Otaku girl", "Jessica Bum", "Kutie Kitten", "Chuu", "Jinni", "MEAT"
         };
 
+        DataAccess db = new DataAccess();
+        public List<Account> getAccounts()
+        {
+            var list = db.getUser();
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            return list;
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<Account> Accounts()
+        {
+            return db.getUser();
+        }
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();
-            var kek = Enumerable.Range(1, 6).Select(index => new WeatherForecast
-            
+            return Enumerable.Range(1, 6).Select(index => new WeatherForecast
+
             {
                 DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
-            Console.Write(kek);
-            return kek;
         }
 
         [HttpGet("[action]")]
         public IEnumerable<EGirl> eGirlOfTheWeek()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 6).Select(index => new EGirl
+            return Enumerable.Range(0, 7).Select(index => new EGirl
             {
-                hotnessRating = rng.Next(11, 10),
-                name = eGirls[rng.Next(eGirls.Length)]
+                name = eGirls[index],
+                hotnessRating = rng.Next(0, 10)
             });
         }
 
@@ -65,5 +87,6 @@ namespace bug_tracker.Controllers
                 }
             }
         }
+
     }
 }
